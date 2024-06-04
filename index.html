@@ -3,10 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/deck-card.css">
     <link rel="stylesheet" href="styles/style.css">
     <script defer src="scripts/app.js" type="module"></script>
     <title>Document</title>
 </head>
 <body>
+    <div class="app-wrapper">
+        <nav class="nav-wrapper">
+            <div class="nav-panel">
+                <div class="nav-panel-buttons">
+                    <button type="button" class="global-btn-style nav-style-btn" id="settings-btn">⚙</button>
+                    <button type="button" class="global-btn-style nav-style-btn" id="rules-btn">rules</button>
+                </div>
+                <div class="nav-title">
+                    <h2>Blackjack</h2>
+                </div>
+                <div class="top-up-wrapper">
+                    <button type="button" class="global-btn-style nav-style-btn" id="restart-btn">restart</button>
+                    <button type="button" class="global-btn-style nav-style-btn" id="top-up-btn">topup</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="table-wrapper">
+            <div class="table">
+                <div class="dealer-side">
+                    <span class="dealer-score"></span>
+                    <div class="dealer-cards"></div>
+                </div>
+            <div class="table-center-wrapper">
+                <button type="button" class="global-btn-style table-btn-style" id="reset-btn">reset</button>
+                <div class="current-bet-wrapper">
+                    <span class="current-bet-txt">current bet</span>
+                    <div class="current-bet"></div>
+                </div>   
+                <button type="button" class="global-btn-style table-btn-style" id="next-round-btn">next</button>
+            </div>
+                
+                <div class="player-side">
+                    <span class="player-score"></span>
+                    <div class="player-cards"></div>
+                </div>
+            </div>
+        </main>
+
+
+        <div class="player-panel-wrapper">
+            <div class="player-panel">
+                <div class="player-left-side-btns-wrapper">
+                    <button type="button" class="global-btn-style left-side-btn-style" data-value="20">20</button>
+                    <button type="button" class="global-btn-style left-side-btn-style" data-value="50">50</button>
+                    <button type="button" class="global-btn-style left-side-btn-style" data-value="100">100</button>
+                    <button type="button" class="global-btn-style left-side-btn-style" data-value="200">200</button>
+                    <button type="button" class="global-btn-style left-side-btn-style" data-value="500">500</button>
+                    <button type="button" class="global-btn-style left-side-btn-style" data-value="1000">1000</button>
+                    <button type="button" class="global-btn-style left-side-btn-style" data-value="5000">5000</button>
+                    <button type="button" class="global-btn-style left-side-btn-style" data-value="all-in">all-in</button>
+                </div>
+                <div class="player-right-side-btns-wrapper">
+                    <button type="button" class="global-btn-style right-side-btn-style" id="pass-btn">pass</button>
+                    <button type="button" class="global-btn-style right-side-btn-style" id="hit-btn">hit</button>
+                    <button type="button" class="global-btn-style right-side-btn-style" id="double-btn">double</button>
+                    <button type="button" class="global-btn-style right-side-btn-style" id="split-btn">split</button>
+                </div>
+
+                
+                <div class="player-bet-wrapper">
+                    <span class="player-bet-txt">bet</span>
+                    <span class="player-bet">1000</span>
+                    <span class="player-balance-txt">balance</span>
+                    <span class="player-balance">1000$</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
