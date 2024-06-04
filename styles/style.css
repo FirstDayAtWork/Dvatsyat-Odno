@@ -1,0 +1,66 @@
+:root{
+    --card-mult: 6;
+    --card-height: calc(540px / var(--card-mult));
+    --card-width: calc(360px / var(--card-mult));
+    --card-radius: 5px;
+    --card-side: 15px;
+}
+
+.card{
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: var(--card-width);
+    height: var(--card-height);
+    max-height: var(--card-height);
+    border: 1px solid #1c1c1c;
+    border-radius: var(--card-radius);
+    background-color: white;
+    color: black;
+    .card-content{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;;
+        font-size: calc(4rem / var(--card-mult));
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        .card-left-side, .card-right-side{
+            
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            /* letter-spacing: -8px; */
+            line-height: calc(var(--card-mult) / var(--card-mult));
+        }
+
+        .card-middle{
+            font-size: calc(6rem / var(--card-mult));
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-items: center;
+            .left-signs, .center-signs, .right-signs{
+                display: flex;
+                flex-flow: column nowrap;
+                height: 100%;
+                justify-content: space-around;
+                align-items: center;
+            }
+        }
+
+        .card-left-side{
+            padding: calc(10px / var(--card-mult));
+        }
+        .card-left-side-sign, .card-right-side-sign{
+            font-size: calc(5rem / var(--card-mult));
+        }
+        .card-right-side{
+            padding: calc(10px / var(--card-mult));
+            transform: scale(-1, -1);
+        }
+
+    }
+
+    .empty-card-space{
+        width: calc(50px / var(--card-mult));
+    }
+}

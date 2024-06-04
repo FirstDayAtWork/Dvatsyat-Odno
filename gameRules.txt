@@ -1,0 +1,14 @@
+Blackjack game rules and features:
+
+- This is a 1 player game (for now) + dealer (who plays too)
+- Player can make a bet (player bet equal to dealer bet) // not sure about that
+(20, 50, 100, 200, 500, 1000, max)
+- Player can add money onclick
+- Player options:  
+    -PASS/STAND (enough cards), 
+    -HIT (add one more card),
+    -DOUBLE/X2 (double bet + add exactly one card), 
+    -SPLIT (avaible if two cards has equal signs , split your hand into two with x2 bet, all other options still avaible)
+- No time limits for turn?
+- U can play with 1-6 decks of cards
+- if no cards in deck -> add new deck
