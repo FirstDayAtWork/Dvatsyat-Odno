@@ -29,20 +29,20 @@
         <main class="table-wrapper">
             <div class="table">
                 <div class="dealer-side">
-                    <span class="dealer-score"></span>
+                    <span class="dealer-score" data-score-value=""></span>
                     <div class="dealer-cards"></div>
                 </div>
             <div class="table-center-wrapper">
                 <button type="button" class="global-btn-style table-btn-style" id="reset-btn">reset</button>
                 <div class="current-bet-wrapper">
                     <span class="current-bet-txt">current bet</span>
-                    <div class="current-bet"></div>
+                    <div class="current-bet" data-cur-bet-value=""></div>
                 </div>   
-                <button type="button" class="global-btn-style table-btn-style" id="next-round-btn">next</button>
+                <button type="button" aria-disabled="false" class="global-btn-style table-btn-style" id="start-round-btn" >deal</button>
             </div>
                 
                 <div class="player-side">
-                    <span class="player-score"></span>
+                    <span class="player-score" data-score-value=""></span>
                     <div class="player-cards"></div>
                 </div>
             </div>
@@ -52,28 +52,28 @@
         <div class="player-panel-wrapper">
             <div class="player-panel">
                 <div class="player-left-side-btns-wrapper">
-                    <button type="button" class="global-btn-style left-side-btn-style" data-value="20">20</button>
-                    <button type="button" class="global-btn-style left-side-btn-style" data-value="50">50</button>
-                    <button type="button" class="global-btn-style left-side-btn-style" data-value="100">100</button>
-                    <button type="button" class="global-btn-style left-side-btn-style" data-value="200">200</button>
-                    <button type="button" class="global-btn-style left-side-btn-style" data-value="500">500</button>
-                    <button type="button" class="global-btn-style left-side-btn-style" data-value="1000">1000</button>
-                    <button type="button" class="global-btn-style left-side-btn-style" data-value="5000">5000</button>
-                    <button type="button" class="global-btn-style left-side-btn-style" data-value="all-in">all-in</button>
+                    <button type="button" class="global-btn-style left-side-btn-style bet-buttons" aria-disabled="false" data-value="20">20</button>
+                    <button type="button" class="global-btn-style left-side-btn-style bet-buttons" aria-disabled="false" data-value="50">50</button>
+                    <button type="button" class="global-btn-style left-side-btn-style bet-buttons" aria-disabled="false" data-value="100">100</button>
+                    <button type="button" class="global-btn-style left-side-btn-style bet-buttons" aria-disabled="false" data-value="200">200</button>
+                    <button type="button" class="global-btn-style left-side-btn-style bet-buttons" aria-disabled="false" data-value="500">500</button>
+                    <button type="button" class="global-btn-style left-side-btn-style bet-buttons" aria-disabled="false" data-value="1000">1000</button>
+                    <button type="button" class="global-btn-style left-side-btn-style bet-buttons" aria-disabled="false" data-value="5000">5000</button>
+                    <button type="button" class="global-btn-style left-side-btn-style bet-buttons" aria-disabled="false" data-value="all-in">all-in</button>
                 </div>
                 <div class="player-right-side-btns-wrapper">
-                    <button type="button" class="global-btn-style right-side-btn-style" id="pass-btn">pass</button>
-                    <button type="button" class="global-btn-style right-side-btn-style" id="hit-btn">hit</button>
-                    <button type="button" class="global-btn-style right-side-btn-style" id="double-btn">double</button>
-                    <button type="button" class="global-btn-style right-side-btn-style" id="split-btn">split</button>
+                    <button type="button" aria-disabled="true" class="global-btn-style right-side-btn-style" id="pass-btn">pass</button>
+                    <button type="button" aria-disabled="true" class="global-btn-style right-side-btn-style" id="hit-btn">hit</button>
+                    <button type="button" aria-disabled="true" class="global-btn-style right-side-btn-style" id="double-btn">double</button>
+                    <button type="button" aria-disabled="true" class="global-btn-style right-side-btn-style" id="split-btn">split</button>
                 </div>
 
                 
                 <div class="player-bet-wrapper">
                     <span class="player-bet-txt">bet</span>
-                    <span class="player-bet">1000</span>
+                    <span class="player-bet" data-bet-value="0">0</span>
                     <span class="player-balance-txt">balance</span>
-                    <span class="player-balance">1000$</span>
+                    <span class="player-balance" data-balance-value="1000">1000$</span>
                 </div>
             </div>
         </div>

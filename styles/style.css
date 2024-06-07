@@ -23,8 +23,10 @@ h2{
 .app-wrapper{
     min-width: 320px;
     min-height: 600px;
+    max-width: 950px;
     padding: 0 0.75rem;
     border: 1px solid black;
+    background-color: #dce1de;
     display: grid;
     grid-template-rows: 0.1fr 2fr 0.3fr;
 }
@@ -38,7 +40,7 @@ h2{
     text-transform:capitalize;
     font-weight: 600;
     width: 90px;
-    background-color: rgb(37, 206, 169);
+    background-color: rgb(236, 236, 236);
 }
 .global-btn-style:hover{
     background-color: rgb(37, 161, 120);
@@ -87,9 +89,13 @@ h2{
 }
 
 .table-wrapper{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     .table{
         display: grid;
+        background-color: #216869;
+        color: white;
+        border: 15px solid #1f2421;
+        border-radius: 50px;
         grid-auto-rows: 160px 100px 160px;
         /* grid-template-columns: 1fr 1fr 1fr; */
         place-items: center;
@@ -132,6 +138,14 @@ h2{
         }
         .player-right-side-btns-wrapper{
             grid-area: right;
+            .right-side-btn-style[aria-disabled="false"]{
+                background-color: #035f5f;
+                color: rgb(236, 236, 236)
+            }
+            .right-side-btn-style[aria-disabled="false"]:hover{
+                background-color: #49a078;
+                color: white;
+            }
         }
 
         .player-bet-wrapper{
@@ -150,7 +164,7 @@ h2{
             flex-flow: row wrap;
             width: 100%;
             gap: 5px;
-            justify-content: space-evenly;
+            justify-content: center;
             align-items: center;
             padding: 5px 0;
         }
@@ -158,18 +172,84 @@ h2{
 }
 
 .left-side-btn-style{
-    border-radius: 17px;
-    width: 58px;
-    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    /* border-radius: 150px; */
+    font-size: 0.75rem;
     margin: 2px 0;
+    /* padding: 8px; */
+    color: white;
+    background-color: rgb(42, 137, 226);
 }
 
-.right-side-btn-style{
+#start-round-btn[aria-disabled="true"] {
+    background: rgb(0 0 0 / 40%);
+    color: rgb(221, 221, 221);
 }
 
+#start-round-btn[aria-disabled="true"]:hover {
+    background: rgb(0 0 0 / 40%);
+    color: rgb(221, 221, 221);
+}
+
+
+.left-side-btn-style[aria-disabled="true"] {
+    background: rgb(0 0 0 / 40%);
+    color: rgb(221, 221, 221);
+}
+
+.left-side-btn-style[aria-disabled="true"]:hover {
+    background: rgb(0 0 0 / 40%);
+    color: rgb(221, 221, 221);
+}
+
+.right-side-btn-style[aria-disabled="true"] {
+    background: rgb(0 0 0 / 40%);
+    color: rgb(221, 221, 221);
+}
+
+.right-side-btn-style[aria-disabled="true"]:hover {
+    background: rgb(0 0 0 / 40%);
+    color: rgb(221, 221, 221);
+}
 
 @media only screen and (max-width: 430px) {
     h2{
         display: none;
     }
+}
+
+.animateCard{
+    animation-duration: .4s;
+    animation-timing-function: ease-in;
+    animation-name: anicard;
+}
+
+.animateScore{
+    animation-duration: .4s;
+    animation-timing-function: ease-in;
+    animation-name: aniscore;
+}
+
+@keyframes anicard {
+    from {
+        visibility: hidden; opacity: 0; transform: translateY(-150%);
+    }
+    to {
+        visibility: visible; opacity: 1; transform: translateY(0);
+    }
+
+}
+
+@keyframes aniscore{
+    from {
+        visibility: hidden; opacity: 0;
+    }
+    to {
+        visibility: visible; opacity: 1;
+    }
+
 }
