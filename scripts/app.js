@@ -1,5 +1,7 @@
 import { renderDeck } from "./deck.js"
-
+const nextRoundBtn = document.getElementById('next-round-btn')
+const overlay = document.querySelector('.overlay')
+const overlayMsg = document.querySelector('.overlay-message')
 const restartGame = document.getElementById('restart-btn')
 const dealerScore = document.querySelector('.dealer-score')
 const dealerCards = document.querySelector('.dealer-cards')
@@ -10,6 +12,9 @@ const currentBet = document.querySelector('.current-bet')
 const playerBalance = document.querySelector('.player-balance')
 const startRound = document.getElementById('start-round-btn')
 const optionButtons = document.querySelectorAll('.right-side-btn-style')
+const navWrapper = document.querySelector('.nav-panel')
+const tableWrapper = document.querySelector('.table')
+const playerPanelWrapper = document.querySelector('.player-panel')
 
 const passBtn = document.getElementById('pass-btn')
 const hitBtn = document.getElementById('hit-btn')
@@ -65,6 +70,7 @@ function giveStartCardsForPlayer(player, score, arr, numOfIterations){
 
 function clearTable(player, score){
     player.innerHTML = ''
+    score.dataset.scoreValue = ''
     score.innerHTML = ''
 }
 
@@ -86,6 +92,10 @@ function addBetValuesToCurrentBet(){
             if(el.ariaDisabled === 'true'){
                 console.log('disabled')
                 return
+            }
+            if(currentBet.dataset.curBetValue === ''){
+                sum = 0
+                console.log(`value: ${sum} ${currentBet.dataset.curBetValue}`)
             }
 
             if(+currentBet.dataset.curBetValue >= +playerBalance.dataset.balanceValue){
@@ -127,16 +137,14 @@ function checkPlayerValues(score){
 
 
 function plusBalance(score){
-    playerBalance.dataset.balanceValue = +playerBalance.dataset.balanceValue
-     + +score.dataset.curBetValue;
-     playerBalance.innerText = playerBalance.dataset.balanceValue
+    playerBalance.dataset.balanceValue = +playerBalance.dataset.balanceValue + +score.dataset.curBetValue;
+    playerBalance.innerText = `${playerBalance.dataset.balanceValue}$`
      return
 }
 
 function minusBalance(score){
-    playerBalance.dataset.balanceValue = playerBalance.dataset.balanceValue
-    - score.dataset.curBetValue;
-    playerBalance.innerText = playerBalance.dataset.balanceValue
+    playerBalance.dataset.balanceValue = playerBalance.dataset.balanceValue - score.dataset.curBetValue;
+    playerBalance.innerText = `${playerBalance.dataset.balanceValue}$`
     return
 }
 
@@ -164,8 +172,27 @@ function newRound(){
         startRound.ariaDisabled = 'true'
         optionButtons.forEach(el => el.ariaDisabled = 'false')
         if(+playerScore.dataset.scoreValue === 21){
-            plusBalance(currentBet)
-            console.log('You Win!')
+            optionButtons.forEach(el => el.ariaDisabled = 'true')
+            setTimeout(() => {
+                let resText = isWinner(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+                overlay.classList.add('animateScore')
+                overlayMsg.innerText = resText
+                navWrapper.classList.add('isBlured')
+                tableWrapper.classList.add('isBlured')
+                playerPanelWrapper.classList.add('isBlured')
+            }, 1500);
+            return
+        }
+        if(+playerScore.dataset.scoreValue > 21){
+            optionButtons.forEach(el => el.ariaDisabled = 'true')
+            setTimeout(() => {
+                let resText = isWinner(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+                overlay.classList.add('animateScore')
+                overlayMsg.innerText = resText
+                navWrapper.classList.add('isBlured')
+                tableWrapper.classList.add('isBlured')
+                playerPanelWrapper.classList.add('isBlured')
+            }, 1500);
             return
         }
         console.log(cards.length)
@@ -176,37 +203,22 @@ function newRound(){
             return
         }
         if(+playerScore.dataset.scoreValue === 21){
-            plusBalance(currentBet)
-            console.log('You Win!')
+            optionButtons.forEach(el => el.ariaDisabled = 'true')
+            setTimeout(() => {
+                let resText = isWinner(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+                overlay.classList.add('animateScore')
+                overlayMsg.innerText = resText
+                navWrapper.classList.add('isBlured')
+                tableWrapper.classList.add('isBlured')
+                playerPanelWrapper.classList.add('isBlured')
+            }, 1500);
             return
         }
         if(+playerScore.dataset.scoreValue > 21){
-            minusBalance(currentBet)
-            console.log('Bust!')
-            return
-        }
-        giveStartCardsForPlayer(playerCards, playerScore, cards, 1)
-        if(+playerScore.dataset.scoreValue === 21){
-            plusBalance(currentBet)
-            console.log('You Win!')
-            return
-        }
-        if(+playerScore.dataset.scoreValue > 21){
-            minusBalance(currentBet)
-            console.log('Bust!')
-            return
-        }
-    })
-
-    passBtn.addEventListener('click', () => {
-        if(startRound.ariaDisabled === 'false'){
-            console.log('aria-disabled-true')
-            return
-        }
-        // dealer gameplay if pass btn is pressed
+            optionButtons.forEach(el => el.ariaDisabled = 'true')
+            // dealer gameplay if hit btn is pressed && playerscore > 21
         for(let i = 0; i < 7; i++){
             if(+dealerScore.dataset.scoreValue > 21){
-                plusBalance(currentBet)
                 console.log('Dealer Lost! You win!')
                 break
             }
@@ -219,34 +231,124 @@ function newRound(){
                 console.log('dealer stand')
                 break
             }
-            console.log('dealer win!')
-            minusBalance(currentBet)
+            if(+dealerScore.dataset.scoreValue === 21){
+                console.log('dealer win!')
+                break
+            }
+        }
+            setTimeout(() => {
+                let resText = isWinner(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+                overlay.classList.add('animateScore')
+                overlayMsg.innerText = resText
+                navWrapper.classList.add('isBlured')
+                tableWrapper.classList.add('isBlured')
+                playerPanelWrapper.classList.add('isBlured')
+            }, 1500);
+            return
+        }
+        giveStartCardsForPlayer(playerCards, playerScore, cards, 1)
+        if(+playerScore.dataset.scoreValue === 21){
+            optionButtons.forEach(el => el.ariaDisabled = 'true')
+            setTimeout(() => {
+                let resText = isWinner(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+                overlay.classList.add('animateScore')
+                overlayMsg.innerText = resText
+                navWrapper.classList.add('isBlured')
+                tableWrapper.classList.add('isBlured')
+                playerPanelWrapper.classList.add('isBlured')
+            }, 1500);
+            return
+        }
+        if(+playerScore.dataset.scoreValue > 21){
+            optionButtons.forEach(el => el.ariaDisabled = 'true')
+            setTimeout(() => {
+                let resText = isWinner(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+                overlay.classList.add('animateScore')
+                overlayMsg.innerText = resText
+                navWrapper.classList.add('isBlured')
+                tableWrapper.classList.add('isBlured')
+                playerPanelWrapper.classList.add('isBlured')
+            }, 1500);
+            return
+        }
+    })
+
+    passBtn.addEventListener('click', () => {
+        if(startRound.ariaDisabled === 'false'){
+            console.log('aria-disabled-true')
+            return
+        }
+        optionButtons.forEach(el => el.ariaDisabled = 'true')
+        // dealer gameplay if pass btn is pressed
+        for(let i = 0; i < 7; i++){
+            if(+dealerScore.dataset.scoreValue > 21){
+                console.log('Dealer Lost! You win!')
+                break
+            }
+            if(+dealerScore.dataset.scoreValue <= 16 ){
+                giveStartCardsForPlayer(dealerCards, dealerScore, cards, 1)
+                console.log('dealer hit!')
+                continue
+            }
+            if(+dealerScore.dataset.scoreValue >= 17 && +dealerScore.dataset.scoreValue <= 20){
+                console.log('dealer stand')
+                break
+            }
+            if(+dealerScore.dataset.scoreValue === 21){
+                console.log('dealer win!')
+                break
+            }
         }
         setTimeout(() => {
-            isWinner(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
-            clearTable(dealerCards, dealerScore)
-            clearTable(playerCards, playerScore)
-            
-        }, 3000);
+            let resText = isWinner(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+            overlay.classList.add('animateScore')
+            overlayMsg.innerText = resText
+            navWrapper.classList.add('isBlured')
+            tableWrapper.classList.add('isBlured')
+            playerPanelWrapper.classList.add('isBlured')
+        }, 1500);
 
     })
 }
+
+nextRoundBtn.addEventListener('click', () => {
+    overlay.classList.toggle('animateScore')
+    navWrapper.classList.toggle('isBlured')
+    tableWrapper.classList.toggle('isBlured')
+    playerPanelWrapper.classList.toggle('isBlured')
+    clearTable(dealerCards, dealerScore)
+    clearTable(playerCards, playerScore)
+    currentBet.dataset.curBetValue = ''
+    currentBet.innerText = ''
+    enableBetButtons()
+    startRound.ariaDisabled = 'false'
+})
 
 
 function isWinner(pScore, dScore, bet){
     if(+pScore === +dScore){
         console.log('Draw!')
-        return
+        return "Draw"
     }
-    if(+pScore > +dScore){
+    if(+pScore > +dScore && +pScore < 22){
         console.log('You win!', pScore)
         plusBalance(bet)
-        return pScore
+        return `You win ${bet.dataset.curBetValue}$`
     }
-    if(+pScore < +dScore){
-        console.log('You win!', dScore)
+    if(+pScore > +dScore && +pScore > 21){
+        console.log('You Lose!', dScore)
         minusBalance(bet)
-        return dScore
+        return `You Lose ${bet.dataset.curBetValue}$`
+    }
+    if(+pScore < +dScore && +dScore < 22){
+        console.log('You Lose!', dScore)
+        minusBalance(bet)
+        return `You Lose! ${bet.dataset.curBetValue}$`
+    }
+    if(+pScore < +dScore && +dScore > 21){
+        console.log('You Win', pScore)
+        plusBalance(bet)
+        return `You Win! ${bet.dataset.curBetValue}$`
     }
 }
 
