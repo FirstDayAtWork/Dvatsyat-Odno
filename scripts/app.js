@@ -7,7 +7,7 @@ const dealerScore = document.querySelector('.dealer-score')
 const dealerCards = document.querySelector('.dealer-cards')
 const playerScore = document.querySelector('.player-score')
 const playerCards = document.querySelector('.player-cards')
-const betButtons = document.querySelectorAll('.bet-buttons')
+const betButtons = document.querySelectorAll('.chip')
 const currentBet = document.querySelector('.current-bet')
 const playerBalance = document.querySelector('.player-balance')
 const startRound = document.getElementById('start-round-btn')
@@ -87,6 +87,7 @@ restartGame.addEventListener('click', () => {
 
 function addBetValuesToCurrentBet(){
     let sum = 0
+
     betButtons.forEach(el => {
         el.addEventListener('click', (e) => {
             if(el.ariaDisabled === 'true'){
@@ -95,12 +96,28 @@ function addBetValuesToCurrentBet(){
             }
             if(currentBet.dataset.curBetValue === ''){
                 sum = 0
-                console.log(`value: ${sum} ${currentBet.dataset.curBetValue}`)
+                console.log(`value: ${sum} ${+currentBet.dataset.curBetValue}`)
             }
 
             if(+currentBet.dataset.curBetValue >= +playerBalance.dataset.balanceValue){
                 return
             }
+            // parent & child click event conflict
+            if(!e.target.dataset.value){
+                if(+currentBet.dataset.curBetValue + +e.target.parentElement.dataset.value > +playerBalance.dataset.balanceValue){
+                    return
+                }
+                if(e.target.parentElement.dataset.value === 'all-in'){
+                    currentBet.dataset.curBetValue = playerBalance.dataset.balanceValue
+                    currentBet.innerText = currentBet.dataset.curBetValue
+                    return
+                }
+                sum += +e.target.parentElement.dataset.value
+                currentBet.dataset.curBetValue = sum
+                currentBet.innerText = sum
+                return
+            }
+            
             if(+currentBet.dataset.curBetValue + +e.target.dataset.value > +playerBalance.dataset.balanceValue){
                 return
             }
@@ -113,7 +130,8 @@ function addBetValuesToCurrentBet(){
             currentBet.dataset.curBetValue = sum
             currentBet.innerText = sum
         })
-    })
+
+        })
 }
 
 
@@ -198,6 +216,13 @@ function newRound(){
         console.log(cards.length)
     })
     hitBtn.addEventListener('click', () => {
+        
+        if(optionButtons[1].ariaDisabled === 'true'){
+            console.log('hit disabled!')
+            return
+        }
+        optionButtons[1].ariaDisabled = 'true'
+
         if(startRound.ariaDisabled === 'false'){
             console.log('aria-disabled-true')
             return
@@ -271,6 +296,7 @@ function newRound(){
             }, 1500);
             return
         }
+        optionButtons.forEach(el => el.ariaDisabled = 'false')
     })
 
     passBtn.addEventListener('click', () => {
