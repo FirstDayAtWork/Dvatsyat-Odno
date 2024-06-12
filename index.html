@@ -21,21 +21,27 @@
         <nav class="nav-wrapper">
             <div class="nav-panel">
                 <div class="nav-panel-buttons">
-                    <button type="button" class="global-btn-style nav-style-btn" id="settings-btn">⚙</button>
-                    <button type="button" class="global-btn-style nav-style-btn" id="rules-btn">rules</button>
+                    <button type="button" class="global-btn-style nav-style-btn" id="settings-btn" aria-disabled="true">⚙</button>
+                    <button type="button" class="global-btn-style nav-style-btn" id="rules-btn" aria-disabled="true">rules</button>
                 </div>
                 <div class="nav-title">
                     <h2>Blackjack</h2>
                 </div>
                 <div class="top-up-wrapper">
-                    <button type="button" class="global-btn-style nav-style-btn" id="restart-btn">restart</button>
-                    <button type="button" class="global-btn-style nav-style-btn" id="top-up-btn">topup</button>
+                    <button type="button" class="global-btn-style nav-style-btn" id="restart-btn" aria-disabled="false">restart</button>
+                    <button type="button" class="global-btn-style nav-style-btn" id="top-up-btn" aria-disabled="true">topup</button>
                 </div>
             </div>
         </nav>
 
         <main class="table-wrapper">
             <div class="table">
+                <div class="player-bet-wrapper">
+                    <!-- <span class="player-bet-txt">bet</span>
+                    <span class="player-bet" data-bet-value="0">0</span> -->
+                    <span class="player-balance-txt">Balance: </span>
+                    <span class="player-balance" data-balance-value="1000">1000$</span>
+                </div>
                 <div class="dealer-side">
                     <span class="dealer-score" data-score-value=""></span>
                     <div class="dealer-cards"></div>
@@ -49,10 +55,12 @@
                 <button type="button" aria-disabled="false" class="global-btn-style table-btn-style" id="start-round-btn" >deal</button>
             </div>
                 
+            <div class="player-side-wrapper">
                 <div class="player-side">
                     <span class="player-score" data-score-value=""></span>
                     <div class="player-cards"></div>
                 </div>
+            </div>
             </div>
         </main>
 
@@ -90,14 +98,6 @@
                     <button type="button" aria-disabled="true" class="global-btn-style right-side-btn-style" id="hit-btn">hit</button>
                     <button type="button" aria-disabled="true" class="global-btn-style right-side-btn-style" id="double-btn">x2</button>
                     <button type="button" aria-disabled="true" class="global-btn-style right-side-btn-style" id="split-btn">split</button>
-                </div>
-
-                
-                <div class="player-bet-wrapper">
-                    <span class="player-bet-txt">bet</span>
-                    <span class="player-bet" data-bet-value="0">0</span>
-                    <span class="player-balance-txt">balance</span>
-                    <span class="player-balance" data-balance-value="1000">1000$</span>
                 </div>
             </div>
         </div>
