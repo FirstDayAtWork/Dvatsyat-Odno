@@ -89,7 +89,6 @@ function addBetValuesToCurrentBet(){
             }
             if(currentBet.dataset.curBetValue === ''){
                 sum = 0
-                console.log(`value: ${sum} ${+currentBet.dataset.curBetValue}`)
             }
 
             if(+currentBet.dataset.curBetValue >= +playerBalance.dataset.balanceValue){
@@ -179,6 +178,7 @@ function newRound(){
         optionButtons.forEach(el => el.ariaDisabled = 'false')
         if(+playerScore.dataset.scoreValue === 21){
             optionButtons.forEach(el => el.ariaDisabled = 'true')
+            currentBet.dataset.curBetValue = +currentBet.dataset.curBetValue * 1.5
             getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
             return
         }
@@ -208,27 +208,7 @@ function newRound(){
             return
         }
         if(+playerScore.dataset.scoreValue > 21){
-            optionButtons.forEach(el => el.ariaDisabled = 'true')
-            // dealer gameplay if hit btn is pressed && playerscore > 21
-        for(let i = 0; i < 7; i++){
-            if(+dealerScore.dataset.scoreValue > 21){
-                console.log('Dealer Lost! You win!')
-                break
-            }
-            if(+dealerScore.dataset.scoreValue <= 16 ){
-                giveStartCardsForPlayer(dealerCards, dealerScore, cards, 1)
-                console.log('dealer hit!')
-                continue
-            }
-            if(+dealerScore.dataset.scoreValue >= 17 && +dealerScore.dataset.scoreValue <= 20){
-                console.log('dealer stand')
-                break
-            }
-            if(+dealerScore.dataset.scoreValue === 21){
-                console.log('dealer win!')
-                break
-            }
-        }
+            dealerMoves(dealerCards, dealerScore, cards)
             getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
             return
         }
@@ -252,27 +232,7 @@ function newRound(){
             console.log('aria-disabled-true')
             return
         }
-        optionButtons.forEach(el => el.ariaDisabled = 'true')
-        // dealer gameplay if pass btn is pressed
-        for(let i = 0; i < 7; i++){
-            if(+dealerScore.dataset.scoreValue > 21){
-                console.log('Dealer Lost! You win!')
-                break
-            }
-            if(+dealerScore.dataset.scoreValue <= 16 ){
-                giveStartCardsForPlayer(dealerCards, dealerScore, cards, 1)
-                console.log('dealer hit!')
-                continue
-            }
-            if(+dealerScore.dataset.scoreValue >= 17 && +dealerScore.dataset.scoreValue <= 20){
-                console.log('dealer stand')
-                break
-            }
-            if(+dealerScore.dataset.scoreValue === 21){
-                console.log('dealer win!')
-                break
-            }
-        }
+        dealerMoves(dealerCards, dealerScore, cards)
         getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
 
     })
@@ -303,29 +263,9 @@ function newRound(){
             return
         }
         
-            optionButtons.forEach(el => el.ariaDisabled = 'true')
-            // dealer gameplay if hit btn is pressed && playerscore > 21
-        for(let i = 0; i < 7; i++){
-            if(+dealerScore.dataset.scoreValue > 21){
-                console.log('Dealer Lost! You win!')
-                break
-            }
-            if(+dealerScore.dataset.scoreValue <= 16 ){
-                giveStartCardsForPlayer(dealerCards, dealerScore, cards, 1)
-                console.log('dealer hit!')
-                continue
-            }
-            if(+dealerScore.dataset.scoreValue >= 17 && +dealerScore.dataset.scoreValue <= 20){
-                console.log('dealer stand')
-                break
-            }
-            if(+dealerScore.dataset.scoreValue === 21){
-                console.log('dealer win!')
-                break
-            }
-        }
-            getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
-            return
+        dealerMoves(dealerCards, dealerScore, cards)
+        getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+        return
         
     })
 
@@ -336,8 +276,14 @@ function newRound(){
             return
         }
 
+        if(+currentBet.dataset.curBetValue * 2 > +playerBalance.dataset.balanceValue){
+            console.log('No money for Split!')
+            return
+        }
+
         if(playerCards.childElementCount === 2){
-            if(+playerCards.children[0].children[0].dataset.value === +playerCards.children[1].children[0].dataset.value){
+            // if(+playerCards.children[0].children[0].dataset.value === +playerCards.children[1].children[0].dataset.value){
+                doubleBtn.ariaDisabled = 'true'
                 const playerClone = playerSide.cloneNode(true)
                 playerSideWrapper.append(playerClone)
                 const splitPlayerCards = document.querySelectorAll('.player-cards')
@@ -348,7 +294,12 @@ function newRound(){
                 splitPlayerCards[1].children[0].remove()
                 splitPlayerScore[1].dataset.scoreValue = splitPlayerCards[1].children[0].children[0].dataset.value
                 splitPlayerScore[1].innerText = splitPlayerScore[1].dataset.scoreValue
-            }
+                giveStartCardsForPlayer(splitPlayerCards[0], splitPlayerScore[0], cards, 1)
+                giveStartCardsForPlayer(splitPlayerCards[1], splitPlayerScore[1], cards, 1)
+                currentBet.dataset.curBetValue = +currentBet.dataset.curBetValue * 2
+                currentBet.innerText = currentBet.dataset.curBetValue
+                splitBtn.ariaDisabled = 'true'
+            // }
         }
     })
 }
@@ -358,6 +309,10 @@ resetBetBtn.addEventListener('click', resetCurrentBet)
 
 
 function resetCurrentBet(){
+    if(startRound.ariaDisabled === 'true'){
+        console.log("Can\'t reset coz Deal-btn is disabled!")
+        return
+    }
     currentBet.dataset.curBetValue = ''
     currentBet.innerText = ''
 }
@@ -369,15 +324,39 @@ nextRoundBtn.addEventListener('click', () => {
     playerPanelWrapper.classList.toggle('isBlured')
     clearTable(dealerCards, dealerScore)
     clearTable(playerCards, playerScore)
-    resetCurrentBet()
-    enableBetButtons()
     startRound.ariaDisabled = 'false'
+    enableBetButtons()
+    resetCurrentBet()
 })
 
 
+function dealerMoves(dCards, dScore, cardz){
+    optionButtons.forEach(el => el.ariaDisabled = 'true')
+    // dealer gameplay if hit btn is pressed && playerscore > 21
+    for(let i = 0; i < 7; i++){
+        if(+dScore.dataset.scoreValue > 21){
+            console.log('Dealer Lost! You win!')
+            break
+        }
+        if(+dScore.dataset.scoreValue <= 16 ){
+            giveStartCardsForPlayer(dCards, dScore, cardz, 1)
+            console.log('dealer hit!')
+            continue
+        }
+        if(+dScore.dataset.scoreValue >= 17 && +dScore.dataset.scoreValue <= 20){
+            console.log('dealer stand')
+            break
+        }
+        if(+dScore.dataset.scoreValue === 21){
+            console.log('dealer win!')
+            break
+        }
+    }
+}
+
 
 function getResult(pScore, dScore, bet){
-    let timer = 2000;
+    let timer = 1700;
     setTimeout(() => {
         let resText = isWinner(pScore, dScore, bet)
         overlay.classList.add('animateScore')
