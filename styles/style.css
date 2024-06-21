@@ -12,6 +12,7 @@
 }
 
 body{
+    height: 100dvh;
     margin: 0;
     padding: 0;
 }
@@ -23,7 +24,7 @@ h2{
 .app-wrapper{
     position: relative;
     min-width: 320px;
-    min-height: 660px;
+    min-height: 100%;
     max-width: 1024px;
     /* padding: 0 0.75rem;
     border: 1px solid black; */
@@ -46,6 +47,7 @@ h2{
         width: 100%;
         height: 100%;
         text-align: center;
+    }
         .overlay-message {
             display: block;
             position: relative;
@@ -90,7 +92,7 @@ h2{
             color: white;
             background-color: #8a1717;;
         }
-    }
+
 
 .global-btn-style{
     border: none;
@@ -112,11 +114,13 @@ h2{
 }
 
 .nav-wrapper{
+}
     .nav-panel{
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: #ebebeb;
+    }
         .nav-panel-buttons{
             display: flex;
             justify-content: start;
@@ -150,10 +154,9 @@ h2{
             justify-content: center;
             align-items: center;
         }
-    }
-}
 
 .table-wrapper{
+}
     /* border: 1px solid red; */
     .table{
         position: relative;
@@ -167,7 +170,7 @@ h2{
         height: 100%;
         place-items: center;
         /* min-height: 100%; */
-
+    }
         .player-bet-wrapper{
             padding: 12px 15px;
             font-size: 1rem;
@@ -192,13 +195,13 @@ h2{
 
         .dealer-side, .player-side{
             text-align: center;
+        }
             .dealer-cards, .player-cards{
                 display: flex;
                 flex-direction: row;
                 padding: 10px 0;
                 gap:2px;
             }
-        }
 
         .player-side-wrapper{
             display: flex;
@@ -207,12 +210,11 @@ h2{
             align-items: center;
             gap: 15px;
         }
-    }
-}
 
 .player-panel-wrapper{
     /* border: 1px solid blue; */
     height: auto;
+}
     .player-panel{
        display: flex;
        flex-flow: column wrap;
@@ -228,11 +230,13 @@ h2{
         background-color: hsla(140, 72%, 28%, 0.781);
         border-top-left-radius: 17px;
         border-top-right-radius: 17px;
+    }
         .player-left-side-btns-wrapper{
             grid-area: left;
         }
         .player-right-side-btns-wrapper{
             grid-area: right;
+        }
             .right-side-btn-style{
                 /* padding: 10px 0; */
             }
@@ -246,7 +250,6 @@ h2{
                 color: white;
                 
             }
-        }
 
        
 
@@ -299,57 +302,59 @@ h2{
 
         .chip:nth-child(1){
             background-color: rgb(59, 231, 111);
+        }
             .chip-value:nth-child(1){
                 border: 2px dashed rgb(59, 231, 111);
             }
-        }
+
 
         .chip:nth-child(2){
             background-color: rgb(59, 90, 231);
+        }
             .chip-value:nth-child(1){
                 border: 2px dashed rgb(59, 90, 231);
             }
-        }
 
 
         .chip:nth-child(3){
             background-color: rgb(220, 231, 59);
+        }
             .chip-value:nth-child(1){
                 border: 2px dashed rgb(220, 231, 59);
             }
-        }
+
 
 
         .chip:nth-child(4){
             background-color: rgb(231, 59, 217);
+        }
             .chip-value:nth-child(1){
                 border: 2px dashed rgb(231, 59, 217);
             }
-        }
 
 
         .chip:nth-child(6){
             background-color: lightseagreen;
+        }
             .chip-value:nth-child(1){
                 border: 2px dashed lightseagreen;
             }
-        }
 
 
         .chip:nth-child(7){
             background-color: pink;
+        }
             .chip-value:nth-child(1){
                 border: 2px dashed pink;
             }
-        }
 
 
         .chip:nth-child(8){
             background-color: brown;
+        }
             .chip-value:nth-child(1){
                 border: 2px dashed brown;
             }
-        }
 
 
 
@@ -365,8 +370,6 @@ h2{
             padding: 5px 0;
             color: #ebebeb;
         }
-    }
-}
 
 [aria-disabled="true"], [aria-disabled="true"]:hover {
     background: rgb(0 0 0 / 40%);

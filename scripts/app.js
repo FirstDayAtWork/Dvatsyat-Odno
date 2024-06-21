@@ -202,28 +202,21 @@ function newRound(){
             console.log('aria-disabled-true')
             return
         }
-        if(+playerScore.dataset.scoreValue === 21){
-            optionButtons.forEach(el => el.ariaDisabled = 'true')
-            getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
+
+        // if player split cards
+        if(playerSideWrapper.children.length > 1){
+            const splitPlayerCards = document.querySelectorAll('.player-cards')
+            const splitPlayerScore = document.querySelectorAll('.player-score')
+            splitPlayerScore[0]
+            giveStartCardsForPlayer(splitPlayerCards[0], splitPlayerScore[0], cards, 1)
+        }
+
+        let res = boolScore(playerScore, dealerScore, dealerCards, currentBet, cards)
+        if(!res){
+            giveStartCardsForPlayer(playerCards, playerScore, cards, 1)
+            res = boolScore(playerScore, dealerScore, dealerCards, currentBet, cards)
             return
         }
-        if(+playerScore.dataset.scoreValue > 21){
-            dealerMoves(dealerCards, dealerScore, cards)
-            getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
-            return
-        }
-        giveStartCardsForPlayer(playerCards, playerScore, cards, 1)
-        if(+playerScore.dataset.scoreValue === 21){
-            optionButtons.forEach(el => el.ariaDisabled = 'true')
-            getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
-            return
-        }
-        if(+playerScore.dataset.scoreValue > 21){
-            optionButtons.forEach(el => el.ariaDisabled = 'true')
-            getResult(playerScore.dataset.scoreValue, dealerScore.dataset.scoreValue, currentBet)
-            return
-        }
-        optionButtons.forEach(el => el.ariaDisabled = 'false')
     })
 
     // Pass
@@ -329,6 +322,21 @@ nextRoundBtn.addEventListener('click', () => {
     resetCurrentBet()
 })
 
+
+function boolScore(pScore, dScore, dCards, bet, cardz){
+    if(+pScore.dataset.scoreValue === 21){
+        optionButtons.forEach(el => el.ariaDisabled = 'true')
+        getResult(pScore.dataset.scoreValue, dScore.dataset.scoreValue, bet)
+        return true
+    }
+    if(+pScore.dataset.scoreValue > 21){
+        dealerMoves(dCards, dScore, cardz)
+        getResult(pScore.dataset.scoreValue, dScore.dataset.scoreValue, bet)
+        return true
+    }
+    optionButtons.forEach(el => el.ariaDisabled = 'false')
+    return false
+}
 
 function dealerMoves(dCards, dScore, cardz){
     optionButtons.forEach(el => el.ariaDisabled = 'true')
