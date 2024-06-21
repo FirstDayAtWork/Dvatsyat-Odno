@@ -303,7 +303,7 @@ h2{
         .chip:nth-child(1){
             background-color: rgb(59, 231, 111);
         }
-            .chip-value:nth-child(1){
+        .chip:nth-child(1) > .chip-value:nth-child(1){
                 border: 2px dashed rgb(59, 231, 111);
             }
 
@@ -311,7 +311,7 @@ h2{
         .chip:nth-child(2){
             background-color: rgb(59, 90, 231);
         }
-            .chip-value:nth-child(1){
+        .chip:nth-child(2) > .chip-value:nth-child(1){
                 border: 2px dashed rgb(59, 90, 231);
             }
 
@@ -319,7 +319,7 @@ h2{
         .chip:nth-child(3){
             background-color: rgb(220, 231, 59);
         }
-            .chip-value:nth-child(1){
+        .chip:nth-child(3) > .chip-value:nth-child(1){
                 border: 2px dashed rgb(220, 231, 59);
             }
 
@@ -328,7 +328,7 @@ h2{
         .chip:nth-child(4){
             background-color: rgb(231, 59, 217);
         }
-            .chip-value:nth-child(1){
+        .chip:nth-child(4) >  .chip-value:nth-child(1){
                 border: 2px dashed rgb(231, 59, 217);
             }
 
@@ -336,7 +336,7 @@ h2{
         .chip:nth-child(6){
             background-color: lightseagreen;
         }
-            .chip-value:nth-child(1){
+        .chip:nth-child(6) >  .chip-value:nth-child(1){
                 border: 2px dashed lightseagreen;
             }
 
@@ -344,7 +344,7 @@ h2{
         .chip:nth-child(7){
             background-color: pink;
         }
-            .chip-value:nth-child(1){
+        .chip:nth-child(7) > .chip-value:nth-child(1){
                 border: 2px dashed pink;
             }
 
@@ -352,7 +352,7 @@ h2{
         .chip:nth-child(8){
             background-color: brown;
         }
-            .chip-value:nth-child(1){
+        .chip:nth-child(8) >  .chip-value:nth-child(1){
                 border: 2px dashed brown;
             }
 
@@ -363,7 +363,7 @@ h2{
         .player-bet-wrapper{
             display: flex;
             flex-flow: row wrap;
-            width: 100%;
+            min-width: 150px;
             gap: 5px;
             justify-content: center;
             align-items: center;

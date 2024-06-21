@@ -11,6 +11,7 @@
     --tw-shadow-color: rgba(0,0,0,.5);
     /* border-top: 2px solid rgba(37, 47, 55, 0.85) ; */
     box-shadow: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color), inset 0 1px 0 0 hsla(0, 0%, 100%, .1);
+}
     .card-content{
         display: flex;
         flex-flow: row nowrap;
@@ -19,6 +20,7 @@
         height: 100%;
         overflow: hidden;
         position: relative;
+    }
         .card-left-side, .card-right-side{
             
             display: flex;
@@ -34,6 +36,7 @@
             flex-flow: row nowrap;
             align-items: center;
             justify-items: center;
+        }
             .left-signs, .center-signs, .right-signs{
                 display: flex;
                 flex-flow: column nowrap;
@@ -41,7 +44,6 @@
                 justify-content: space-around;
                 align-items: center;
             }
-        }
 
         .card-left-side{
             padding: calc(10px / var(--card-mult));
@@ -54,9 +56,6 @@
             transform: scale(-1, -1);
         }
 
-    }
-
     .empty-card-space{
         width: calc(50px / var(--card-mult));
     }
-}
