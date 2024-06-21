@@ -10,6 +10,7 @@ const playerSide = document.querySelector('.player-side')
 const playerScore = document.querySelector('.player-score')
 const playerCards = document.querySelector('.player-cards')
 const betButtons = document.querySelectorAll('.chip')
+const chipValues = document.querySelectorAll('.chip-value')
 const currentBet = document.querySelector('.current-bet')
 const playerBalance = document.querySelector('.player-balance')
 const startRound = document.getElementById('start-round-btn')
@@ -132,10 +133,18 @@ function disableBetButtons(){
     betButtons.forEach(el => {
         el.ariaDisabled = 'true'
     })
+
+    chipValues.forEach(el => {
+        el.ariaDisabled = 'true'
+    })
 }
 
 function enableBetButtons(){
     betButtons.forEach(el => {
+        el.ariaDisabled = 'false'
+    })
+
+    chipValues.forEach(el => {
         el.ariaDisabled = 'false'
     })
 }

@@ -332,6 +332,13 @@ h2{
                 border: 2px dashed rgb(231, 59, 217);
             }
 
+        .chip:nth-child(5){
+            background-color: rgb(231, 59, 59);
+        }
+        .chip:nth-child(5) >  .chip-value:nth-child(1){
+            border: 2px dashed rgb(231, 59, 59);
+            }
+
 
         .chip:nth-child(6){
             background-color: lightseagreen;
